@@ -8,13 +8,7 @@
 * HTML და CSS დიზაინისთვის
 * SQLite (ბაზისთვის)
 
-## ადმინკა ჟიურისთვის (Admin credentials):
-აქ შეგიძლიათ შეხვიდეთ და შეამოწმოთ საიტი შიგნიდან როგორ მუშაობს:
-
-* ლინკი: /admin
-* იუზერი (Username): admin
-* პაროლი (Password): admin1234
-
 ## როგორ ირთვება:
 1. ჩართეთ ვირტუალური გარემო
-2. გაუშვით ბრძანება: python manage.py runserver
+2. cd pcconfig
+3. python manage.py runserver
