@@ -9,6 +9,6 @@
 * SQLite (ბაზისთვის)
 
 ## როგორ ირთვება:
-1. ჩართეთ ვირტუალური გარემო
-2. cd pcconfig
+1. ჩართეთ ვირტუალური venv
+2. cd pcconfi
 3. python manage.py runserver
