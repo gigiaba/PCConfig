@@ -1,5 +1,6 @@
 {% extends 'configurator/base.html' %}
 {% block content %}
+<<<<<<< HEAD
 <div class="max-w-sm mx-auto rgb-border is-active glass-card rounded-2xl p-8 mt-16 relative">
     <h2 class="font-display text-xs font-bold mb-8 text-center text-white uppercase tracking-widest">// ავტორიზაციის პანელი</h2>
 
@@ -28,3 +29,23 @@
     });
 </script>
 {% endblock %}
+=======
+<div class="max-w-md mx-auto bg-cyber-card border border-gray-800 rounded-xl p-6 mt-12">
+    <h2 class="text-xl font-bold mb-6 font-mono text-center text-white">სისტემაში შესვლა</h2>
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="flex flex-col gap-1">
+                <label class="text-xs text-gray-400 font-mono">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition mt-2">შესვლა</button>
+    </form>
+    <p class="text-xs text-center text-gray-500 mt-4 font-mono">ახალი ხარ? <a href="{% url 'register' %}" class="text-blue-400 hover:underline">დარეგისტრირდი</a></p>
+</div>
+<script>
+    document.querySelectorAll('input').forEach(i => i.className = "w-full bg-cyber-dark border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-blue-500");
+</script>
+{% endblock %}
+>>>>>>> 5e09a0f2e8320381cfd3018f141896214f06b2c7
