@@ -1,0 +1,75 @@
+{% comment %}
+    TechForge // Async Sidebar Component Module
+    ეს ფაილი პასუხისმგებელია გვერდითა პანელის დინამიურ განახლებაზე.
+{% endcomment %}
+
+{% if selected_components %}
+    <div id="cart-registry" class="space-y-2.5">
+        {% for c in selected_components %}
+        <div data-node-type="{{ c.category }}" class="bg-fx-bg border border-fx-border p-3 flex justify-between items-center text-xs hover:border-fx-borderBright transition-colors rounded-lg">
+            <div class="truncate mr-3">
+                <span class="text-[9px] text-fx-cyan data-text block uppercase tracking-widest">[{{ c.category }}]</span>
+                <span class="text-white font-medium truncate block data-text">{{ c.brand }} {{ c.name }}</span>
+            </div>
+            <a href="{% url 'toggle_component' c.id %}" class="text-fx-inkDim hover:text-fx-red text-base data-text leading-none px-1 interactive">&times;</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pt-4 border-t border-fx-border data-text text-xs text-fx-inkDim space-y-2.5">
+        <div class="flex justify-between">
+            <span>TOTAL LOAD:</span>
+            <span class="text-white font-bold">{{ total_wattage }} W</span>
+        </div>
+        <div class="flex justify-between items-end text-sm pt-1">
+            <span class="text-fx-inkDim">ESTIMATED NET:</span>
+            <span class="rgb-text font-black text-xl">${{ total_price }}</span>
+        </div>
+    </div>
+
+    {% if fps_data %}
+    <div class="pt-4 border-t border-fx-border space-y-2.5">
+        <h4 class="text-[10px] font-bold text-fx-cyan data-text uppercase tracking-widest">// PERFORMANCE BENCHMARKS:</h4>
+        <div class="space-y-1.5 data-text text-xs">
+            <div class="bg-fx-bg border border-fx-border p-2.5 flex justify-between px-3 rounded-lg">
+                <span class="text-fx-inkDim">Counter-Strike 2</span>
+                <span class="text-fx-green font-bold tracking-wider">{{ fps_data.cs2 }} FPS</span>
+            </div>
+            <div class="bg-fx-bg border border-fx-border p-2.5 flex justify-between px-3 rounded-lg">
+                <span class="text-fx-inkDim">Cyberpunk 2077</span>
+                <span class="text-fx-green font-bold tracking-wider">{{ fps_data.cyberpunk }} FPS</span>
+            </div>
+            <div class="bg-fx-bg border border-fx-border p-2.5 flex justify-between px-3 rounded-lg">
+                <span class="text-fx-inkDim">GTA V</span>
+                <span class="text-fx-green font-bold tracking-wider">{{ fps_data.gta5 }} FPS</span>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="pt-4 border-t border-fx-border text-[10px] text-fx-inkDim/70 data-text text-center uppercase tracking-wide">
+        საჭიროა CPU და GPU წარმადობის სიმულაციისთვის
+    </div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'save_build' %}" data-bypass-ajax class="space-y-2 pt-2">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="კონფიგურაციის სახელი..." required class="w-full bg-fx-bg border border-fx-border px-3 py-2.5 text-xs text-white focus:outline-none focus:border-fx-cyan data-text placeholder-fx-inkDim/40 rounded-lg">
+        {% if compatibility_error %}
+        <button type="button" disabled class="w-full bg-fx-card text-fx-inkDim/50 py-3 font-bold data-text text-xs uppercase tracking-wider border border-fx-border cursor-not-allowed rounded-lg">ლოგიკური შეცდომა</button>
+        {% else %}
+        <button type="submit" class="w-full rgb-btn py-3 data-text font-black text-xs uppercase tracking-wider rounded-lg interactive">💾 მონაცემების შენახვა</button>
+        {% endif %}
+    </form>
+    {% else %}
+    <div class="text-[10px] text-fx-inkDim data-text text-center pt-2 bg-fx-bg border border-fx-border p-3 uppercase tracking-wide rounded-lg">
+        არქივაციისთვის საჭიროა <a href="{% url 'login' %}" class="text-fx-cyan underline hover:text-fx-cyan/80">ავტორიზაცია</a>
+    </div>
+    {% endif %}
+
+{% else %}
+    <div class="text-center py-20 border border-dashed border-fx-border rounded-2xl">
+        <p class="text-fx-inkDim text-xs data-text uppercase tracking-wider">მონაცემები ცარიელია</p>
+        <span class="text-[10px] text-fx-inkDim/60 block mt-1 data-text">დაამატე მოდულები ძირითადი სიიდან</span>
+    </div>
+{% endif %}
