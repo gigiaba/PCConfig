@@ -10,5 +10,5 @@
 
 ## როგორ ირთვება:
 1. ჩართეთ ვირტუალური venv
-2. cd pcconfi
+2. cd pcconfig
 3. python manage.py runserver
